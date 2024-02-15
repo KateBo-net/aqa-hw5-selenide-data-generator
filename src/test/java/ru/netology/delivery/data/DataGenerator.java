@@ -11,43 +11,41 @@ import java.util.*;
 public class DataGenerator {
     static final String dateFormat = "dd.MM.yyyy";
     static List<String> cities = new ArrayList<>();
+
     private DataGenerator() {
     }
 
     public static String generateDate(int shift) {
         // логика генерации строки с датой
-        String date = LocalDate.now().plusDays(shift).format(DateTimeFormatter.ofPattern(dateFormat));
-        return date;
+        return LocalDate.now().plusDays(shift).format(DateTimeFormatter.ofPattern(dateFormat));
     }
 
-    public static void generateListCities() throws IOException{
-        try (BufferedReader fileReader = new BufferedReader(new FileReader("src/test/resources/city.csv", StandardCharsets.UTF_8))){
+    public static void generateListCities() throws IOException {
+        try (BufferedReader fileReader = new BufferedReader(new FileReader("src/test/resources/city.csv", StandardCharsets.UTF_8))) {
             String line;
             while ((line = fileReader.readLine()) != null) {
                 cities.add(line);
             }
         }
     }
-    public static String generateCity(String locale) throws IOException {
+
+    public static String generateCity() throws IOException {
         // генерация города их списка
         generateListCities();
         Random random = new Random();
-        String city = cities.get(random.nextInt(cities.size()));
-        return city;
+        return cities.get(random.nextInt(cities.size()));
     }
 
     public static String generateName(String locale) {
         // генерация фамилия + имя
         Faker faker = new Faker(new Locale(locale));
-        String name = faker.name().lastName() + " " + faker.name().firstName();
-        return name;
+        return faker.name().lastName() + " " + faker.name().firstName();
     }
 
     public static String generatePhone(String locale) {
         // генерация номера телефона
         Faker faker = new Faker(new Locale(locale));
-        String phone = faker.phoneNumber().phoneNumber();
-        return phone;
+        return faker.phoneNumber().phoneNumber();
     }
 
     public static class Registration {
