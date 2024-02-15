@@ -54,7 +54,7 @@ public class DataGenerator {
 
         public static UserInfo generateUser(String locale) throws IOException {
             UserInfo user = new UserInfo();
-            user.city = generateCity(locale);
+            user.city = generateCity();
             user.name = generateName(locale);
             user.phone = generatePhone(locale);
             return user;
