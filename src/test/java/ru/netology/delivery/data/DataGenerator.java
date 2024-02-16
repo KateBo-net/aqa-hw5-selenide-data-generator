@@ -1,6 +1,7 @@
 package ru.netology.delivery.data;
 
 import com.github.javafaker.Faker;
+import lombok.Value;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -53,30 +54,15 @@ public class DataGenerator {
         }
 
         public static UserInfo generateUser(String locale) throws IOException {
-            UserInfo user = new UserInfo();
-            user.city = generateCity();
-            user.name = generateName(locale);
-            user.phone = generatePhone(locale);
-            return user;
+            return new UserInfo(generateCity(), generateName(locale), generatePhone(locale));
         }
     }
 
+    @Value
     public static class UserInfo {
         String city;
         String name;
         String phone;
-
-        public String getCity() {
-            return city;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getPhone() {
-            return phone;
-        }
     }
 
 }
